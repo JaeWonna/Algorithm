@@ -1,2 +1,2 @@
 # Algorithm
-알고리즘
+Algorithm 문제풀이
