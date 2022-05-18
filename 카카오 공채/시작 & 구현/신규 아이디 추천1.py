@@ -10,3 +10,5 @@ def solution(new_id):
     st = re.sub('^[.]|[.]$', '', st)
     st = st if len(st) > 2 else st + "".join([st[-1] for i in range(3-len(st))])
     return st
+
+# 구글에 검색해서 더 나은 코드 보기 (설명 나와있는)
