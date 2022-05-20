@@ -15,3 +15,7 @@ def DFS(n, computers, com, visited):
         if connect != com and computers[com][connect] == 1:
             if visited[connect] == False:
                 DFS(n, computers, connect, visited)
+    
+n = 3
+computers = [[1,1,0], [1,1,0], [0,0,1]]
+print(solution(n, computers))
