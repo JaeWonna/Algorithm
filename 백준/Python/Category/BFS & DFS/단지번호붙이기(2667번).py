@@ -1,3 +1,9 @@
+'''
+BFS의 정형화된 패턴을 읽어내기
+
+'''
+
+
 from collections import deque
 
 dx = [-1, 1, 0, 0]
