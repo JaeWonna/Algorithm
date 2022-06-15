@@ -1,32 +1,41 @@
-m, n, k = map(int, input().split())
-s = [[0] * n for i in range(m)]
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
-cnt = []
-for i in range(k):
-    x1, y1, x2, y2 = map(int, input().split())
-    for j in range(y1, y2):
-        for k in range(x1, x2):
-            s[j][k] = 1
+from collections import deque
+
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
+
+def bfs(i,j):
+    queue = deque()
+    queue.append((i,j))
+    cnt = 1
+
+    while queue:
+        x,y = queue.popleft()
+
+        for i in range(4):
+            nx,ny = x+dx[i], y+dy[i]
+
+            if 0<=nx<m and 0<=ny<n and graph[nx][ny] == 0:
+                graph[nx][ny] = 1
+                queue.append((nx,ny))
+                cnt += 1
+    return cnt
+
+m,n,k = map(int, input().split())
+graph = [[0]*n for _ in range(m)]
+
+for _ in range(k):
+    x1,y1,x2,y2 = map(int, input().split())
+    for i in range(y1, y2):
+        for j in range(x1,x2):
+            graph[i][j] = 1
+
+res = []
 
 for i in range(m):
     for j in range(n):
-        if s[i][j] == 0:
-            count = 1
-            s[i][j] = 1
-            queue = [[i, j]]
-            while queue:
-                x, y = queue[0][0], queue[0][1]
-                del queue[0]
-                for k in range(4):
-                    x1 = x + dx[k]
-                    y1 = y + dy[k]
-                    if 0 <= x1 < m and 0 <= y1 < n and s[x1][y1] == 0:
-                        s[x1][y1] = 1
-                        count += 1
-                        queue.append([x1, y1])
-            cnt.append(count)
-print(len(cnt))
-cnt.sort()
-for i in cnt:
-    print(i, end=' ')
+        if graph[i][j] == 0:
+            graph[i][j] = 1
+            res.append(bfs(i,j))
+
+print(len(res))
+print(*sorted(res))
