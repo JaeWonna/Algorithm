@@ -1,22 +1,21 @@
 import sys
 input = sys.stdin.readline
 
-N = int(input())
-T = []
-P = []
-DP = [0]*(N+1)
+n = int(input())
+T,P = [],[]
+d = [0]*(n+1)
 
-for _ in range(N):
+for _ in range(n):
     time, price = map(int, input().split())
     T.append(time)
     P.append(price)
 
-max_value = 0
-for i in range(N):
-    max_value = max(max_value, DP[i])
+M = 0
 
-    if i + T[i] > N:
+for i in range(n):
+    M = max(M, d[i])
+    if i+T[i] > n:
         continue
-    DP[i+T[i]] = max(DP[i+T[i]], max_value + P[i])
+    d[i+T[i]] = max(d[i+T[i]], M + P[i])
 
-print(max(DP))
+print(max(d))
