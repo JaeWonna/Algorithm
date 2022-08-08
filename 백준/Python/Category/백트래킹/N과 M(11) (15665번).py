@@ -2,14 +2,16 @@ n,m = map(int,input().split())
 num = sorted(list(set(map(int,input().split()))))
 s = []
 
-def backtracking():
-    if len(s) == m:
+def backtracking(cnt):
+    if cnt == m:
         print(*s)
         return
     
-    for i in range(len(num)):
-        s.append(num[i])
-        backtracking()
+    cnt += 1
+
+    for i in num:
+        s.append(i)
+        backtracking(cnt) 
         s.pop()
 
-backtracking()
+backtracking(0)
